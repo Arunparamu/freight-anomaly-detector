@@ -306,18 +306,6 @@ mvn -version
 
 ---
 
-## Clone Repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/freight-anomaly-detector.git
-```
-
-Navigate into the project:
-
-```bash
-cd freight-anomaly-detector
-```
-
 ---
 
 ## Run Application
