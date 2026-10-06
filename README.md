@@ -1,4 +1,4 @@
-# 🚚 Freight Anomaly Detector
+# Freight Anomaly Detector
 
 An AI-assisted freight cost anomaly detection system built using **Java 17 and Spring Boot**.
 
@@ -6,7 +6,7 @@ The system analyzes shipment records on a weekly basis, calculates normalized fr
 
 ---
 
-## 🎯 Problem Statement
+##  Problem Statement
 
 Freight costs can vary because of:
 
@@ -33,62 +33,9 @@ The system produces a structured CSV report containing:
 
 ---
 
-## 🏗️ Architecture
 
-```text
-                 ┌───────────────────────┐
-                 │ shipment_records.csv  │
-                 └───────────┬───────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │ CSV Processing  │
-                    └────────┬────────┘
-                             │
-                             ▼
-                  ┌──────────────────────┐
-                  │ Weekly Aggregation   │
-                  └──────────┬───────────┘
-                             │
-                             ▼
-              ┌──────────────────────────────┐
-              │ Cost / Tonne / KM Calculation│
-              └──────────────┬───────────────┘
-                             │
-                 ┌───────────┴───────────┐
-                 ▼                       ▼
-        ┌─────────────────┐     ┌──────────────────┐
-        │ Historical      │     │ Peer Route       │
-        │ 8-Week Baseline │     │ Comparison       │
-        └────────┬────────┘     └────────┬─────────┘
-                 │                       │
-                 └───────────┬───────────┘
-                             ▼
-                    ┌─────────────────┐
-                    │ Anomaly Detector│
-                    └────────┬────────┘
-                             │
-                             ▼
-                  ┌─────────────────────┐
-                  │ Context Note Search │
-                  └──────────┬──────────┘
-                             │
-                    ┌────────┴────────┐
-                    ▼                 ▼
-               Justified          Unexplained
-               Anomaly              Anomaly
-                    │                 │
-                    ▼                 ▼
-             No (justified)          Yes
-                    │                 │
-                    └────────┬────────┘
-                             ▼
-                       output.csv
-```
 
----
-
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Technology | Purpose |
 |---|---|
@@ -102,7 +49,7 @@ The system produces a structured CSV report containing:
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 freight-anomaly-detector/
@@ -143,7 +90,7 @@ freight-anomaly-detector/
 
 ---
 
-# 📊 Data Processing
+#  Data Processing
 
 ## 1. Weekly Aggregation
 
@@ -193,7 +140,7 @@ This normalization allows different shipment sizes and distances to be compared 
 
 ---
 
-# 📈 Anomaly Detection
+#  Anomaly Detection
 
 The system uses two independent baselines.
 
@@ -238,7 +185,7 @@ Peer Average
 
 ---
 
-## 🚨 Anomaly Threshold
+##  Anomaly Threshold
 
 A route is considered suspicious when its cost increase crosses the configured anomaly threshold.
 
@@ -278,33 +225,8 @@ This prevents the system from incorrectly using unrelated notes as explanations.
 
 ---
 
-# 🤖 AI / LLM Design
 
-The project is designed so that the numerical anomaly detection remains **deterministic**.
-
-The intended AI architecture is:
-
-```text
-Deterministic Analytics
-        ↓
-Anomaly Detection
-        ↓
-Context Retrieval
-        ↓
-LLM
-        ↓
-Grounded Explanation
-```
-
-The LLM should not independently decide whether a shipment is anomalous.
-
-Instead, it receives verified numerical results and retrieved context and generates a concise explanation.
-
-This reduces hallucination and improves reproducibility.
-
----
-
-# 📄 Output
+# Output
 
 The application generates:
 
@@ -339,7 +261,7 @@ matched_note_id: N002
 
 ---
 
-# ▶️ How to Run
+#  How to Run
 
 ## Prerequisites
 
@@ -407,7 +329,7 @@ output/output.csv
 
 ---
 
-# 📌 Current Result
+#  Current Result
 
 The current implementation successfully processes the provided shipment dataset and generates:
 
@@ -423,7 +345,7 @@ output/output.csv
 
 ---
 
-# 🔍 Example Workflow
+# Example Workflow
 
 ```text
 2,940 shipment records
@@ -447,81 +369,13 @@ Generate final CSV
 
 ---
 
-# 🔒 Reproducibility
 
-The core calculations are deterministic.
 
-Running the application multiple times with the same input data produces the same:
+# Author
 
-- Weekly aggregation
-- Cost calculations
-- Historical baselines
-- Peer baselines
-- Anomaly decisions
-- Matched context notes
-
-This is important for reliable evaluation and auditing.
-
----
-
-# 🚀 Future Improvements
-
-The following improvements can be added:
-
-### 1. RAG-based Context Retrieval
-
-Use embeddings and vector search to retrieve semantically relevant operational notes.
-
-```text
-Context Notes
-     ↓
-Embeddings
-     ↓
-Vector Store
-     ↓
-Similarity Search
-     ↓
-Relevant Notes
-```
-
-### 2. LLM Integration
-
-Use an LLM to generate grounded explanations from verified context.
-
-### 3. REST API
-
-Add endpoints such as:
-
-```text
-GET /api/analyze
-GET /api/anomalies
-GET /api/anomalies/{route}
-```
-
-### 4. Dashboard
-
-Build a React dashboard to display:
-
-- Anomalous routes
-- Cost trends
-- Historical comparisons
-- Peer comparisons
-- Context explanations
-
-### 5. Database
-
-Move the CSV data into PostgreSQL for production-scale processing.
-
----
-
-# 👨‍💻 Author
-
-**Arun Kumar K**
+**ArunKumar K**
 
 Java | Spring Boot | SQL | React | Data Structures & Algorithms | AI Engineering
 
----
-
-## 📜 License
 
 This project was created as part of an AI Engineering internship case study.
