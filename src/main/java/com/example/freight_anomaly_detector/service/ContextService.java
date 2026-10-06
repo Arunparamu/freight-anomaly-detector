@@ -30,9 +30,6 @@ public class ContextService {
                 continue;
             }
 
-            /*
-             * Note must occur inside the current week.
-             */
             boolean dateMatches =
                     !note.getDate().isBefore(weekOf)
                     &&
@@ -42,10 +39,7 @@ public class ContextService {
                 continue;
             }
 
-            /*
-             * Ignore notes that explicitly say there
-             * was no cost impact.
-             */
+    
             String text =
                     note.getNote().toLowerCase();
 

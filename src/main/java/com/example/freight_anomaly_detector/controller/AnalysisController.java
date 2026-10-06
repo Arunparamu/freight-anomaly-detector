@@ -28,11 +28,7 @@ public class AnalysisController {
     private final AnomalyService anomalyService;
 
 
-    public AnalysisController(
-            CsvService csvService,
-            AggregationService aggregationService,
-            AnomalyService anomalyService) {
-
+    public AnalysisController(CsvService csvService,AggregationService aggregationService,AnomalyService anomalyService) {
         this.csvService = csvService;
         this.aggregationService = aggregationService;
         this.anomalyService = anomalyService;
@@ -42,56 +38,27 @@ public class AnalysisController {
     @GetMapping("/api/analyze")
     public String analyze() {
 
-        String shipmentFile =
-                "data/shipment_records.csv";
+        String shipmentFile ="data/shipment_records.csv";
 
-        String contextFile =
-                "data/context_notes.csv";
+        String contextFile ="data/context_notes.csv";
 
-        String outputFile =
-                "output/output.csv";
+        String outputFile ="output/output.csv";
 
-
-        // -----------------------------------------
-        // READ DATA
-        // -----------------------------------------
-
-        List<Shipment> shipments =
-                csvService.readShipments(
+        List<Shipment> shipments =csvService.readShipments(
                         shipmentFile
                 );
 
-        List<ContextNote> notes =
-                csvService.readContextNotes(
+        List<ContextNote> notes =csvService.readContextNotes(
                         contextFile
                 );
-
-
-        // -----------------------------------------
-        // AGGREGATE
-        // -----------------------------------------
-
-        List<AggregationService.WeeklyData>
-                weeklyData =
-                aggregationService.aggregate(
+        List<AggregationService.WeeklyData> weeklyData =aggregationService.aggregate(
                         shipments
                 );
 
-
-        // -----------------------------------------
-        // ANALYZE
-        // -----------------------------------------
-
-        List<AnomalyResult> results =
-                anomalyService.analyze(
+        List<AnomalyResult> results = anomalyService.analyze(
                         weeklyData,
                         notes
                 );
-
-
-        // -----------------------------------------
-        // WRITE OUTPUT
-        // -----------------------------------------
 
         writeOutput(
                 outputFile,

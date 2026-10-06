@@ -11,20 +11,6 @@ import java.util.*;
 @Service
 public class AnomalyService {
 
-    /*
-     * The sample output strongly indicates a 20% threshold.
-     *
-     * Example:
-     * Delhi-Jaipur:
-     * +35.5% history
-     * +21.0% peers
-     * => flagged
-     *
-     * Mumbai-Pune:
-     * +9.2% history
-     * +23.6% peers
-     * => flagged
-     */
     private static final double ANOMALY_THRESHOLD = 20.0;
 
 
@@ -51,11 +37,6 @@ public class AnomalyService {
 
             double currentCost =
                     current.getCostPerTonneKm();
-
-
-            // -----------------------------------------
-            // 1. OWN HISTORY - PREVIOUS 8 WEEKS
-            // -----------------------------------------
 
             List<Double> previousWeeks =
                     weeklyData.stream()
@@ -103,13 +84,6 @@ public class AnomalyService {
                                 / historyAverage) * 100;
             }
 
-
-            // -----------------------------------------
-            // 2. SIMILAR ROUTES
-            // SAME WEEK + SAME ROUTE TYPE
-            // EXCLUDE CURRENT ROUTE
-            // -----------------------------------------
-
             List<Double> peerCosts =
                     weeklyData.stream()
 
@@ -152,11 +126,6 @@ public class AnomalyService {
                                 / peerAverage) * 100;
             }
 
-
-            // -----------------------------------------
-            // 3. DETERMINE ANOMALY
-            // -----------------------------------------
-
             boolean historyAnomaly =
                     historyPercentage != null
                     &&
@@ -172,11 +141,6 @@ public class AnomalyService {
             boolean anomaly =
                     historyAnomaly || peerAnomaly;
 
-
-            // -----------------------------------------
-            // 4. CHECK CONTEXT NOTES
-            // -----------------------------------------
-
             ContextNote matchingNote = null;
 
             if (anomaly) {
@@ -189,10 +153,6 @@ public class AnomalyService {
                         );
             }
 
-
-            // -----------------------------------------
-            // 5. BUILD RESULT
-            // -----------------------------------------
 
             AnomalyResult result =
                     new AnomalyResult();

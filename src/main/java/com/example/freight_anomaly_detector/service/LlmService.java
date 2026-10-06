@@ -9,16 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class LlmService {
 
-    /*
-     * Grounded explanation generator.
-     *
-     * This version does NOT call an external LLM.
-     * It generates the explanation only from the retrieved note.
-     *
-     * Later you can replace this method with an actual LLM call
-     * using temperature = 0.
-     */
-
     public String generateReason(
             ContextNote note,
             boolean justified) {
