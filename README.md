@@ -48,6 +48,27 @@ The system produces a structured CSV report containing:
 | LocalDate | Date and weekly calculations |
 
 ---
+# Example Workflow
+
+```text
+2,940 shipment records
+          ↓
+Weekly aggregation
+          ↓
+728 route-week records
+          ↓
+Calculate cost/tonne-km
+          ↓
+Compare with previous 8 weeks
+          ↓
+Compare with similar routes
+          ↓
+Detect anomalies
+          ↓
+Check operational context
+          ↓
+Generate final CSV
+```
 
 ##  Project Structure
 
@@ -209,7 +230,7 @@ private static final double ANOMALY_THRESHOLD = 20.0;
 
 ---
 
-# 🧠 Context Validation
+#  Context Validation
 
 After detecting an anomaly, the system searches `context_notes.csv`.
 
@@ -345,37 +366,8 @@ output/output.csv
 
 ---
 
-# Example Workflow
-
-```text
-2,940 shipment records
-          ↓
-Weekly aggregation
-          ↓
-728 route-week records
-          ↓
-Calculate cost/tonne-km
-          ↓
-Compare with previous 8 weeks
-          ↓
-Compare with similar routes
-          ↓
-Detect anomalies
-          ↓
-Check operational context
-          ↓
-Generate final CSV
-```
-
----
 
 
 
-# Author
-
-**ArunKumar K**
-
-Java | Spring Boot | SQL | React | Data Structures & Algorithms | AI Engineering
 
 
-This project was created as part of an AI Engineering internship case study.
